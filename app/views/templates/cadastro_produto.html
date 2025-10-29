@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Produto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cadastro_produto.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Olá, {{ usuario }}</h1>
+            <nav class="nav-links">
+                <a href="{{ url_for('historico_estoque') }}" class="btn-link">Movimentação de Estoque</a>
+                <a href="{{ url_for('tela_principal') }}" class="btn-link sair">Tela principal</a>
+            </nav>
+        </header>
+        {% if error %}
+            <p class="mensagem-erro" style="text-align:center; margin-bottom:12px;">{{ error }}</p>
+        {% endif %}
+
+     <main class="main-container">
+    <!-- Formulário de Cadastro -->
+    <section class="cadastro-container">
+        <h2>Cadastrar Produto</h2>
+        <form action="{{ url_for('cadastro_produto') }}" method="POST" class="form-produto">
+            <div class="input-group">
+                <label for="nome">Nome do Remédio:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="input-group">
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" name="descricao" required>
+            </div>
+
+            <div class="input-group">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" name="quantidade" required>
+            </div>
+
+            <div class="input-group">
+                <label for="preco">Preço:</label>
+                <input type="number" step="0.01" id="preco" name="preco" required>
+            </div>
+
+            <div class="input-group">
+                <label for="quantidade_min">Quantidade Mínima:</label>
+                <input type="number" id="quantidade_min" name="quantidade_min" required>
+            </div>
+
+            <div class="input-group">
+                <label for="tipo">Tipo do Remédio:</label>
+                <select id="tipo" name="tipo">
+                    <option value="alimento" selected>Alimento</option>
+                    <option value="comprimido">Comprimido</option>
+                    <option value="gota">Em gotas</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="especie">Espécie do Animal:</label>
+                <input type="text" id="especie" name="especie">
+            </div>
+
+            <div class="input-group">
+                <label for="dosagem">Dosagem do Remédio:</label>
+                <input type="text" id="dosagem" name="dosagem">
+            </div>
+
+            <div class="input-group">
+                <label for="validade">Validade do Remédio:</label>
+                <input type="date" id="validade" name="validade">
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="btn cadastrar">Cadastrar</button>
+                <a href="{{ url_for('tela_principal') }}" class="btn voltar">Voltar</a>
+            </div>
+        </form>
+    </section>
+
+
+    <section class="lista-container">
+        <h3>Lista de Produtos</h3>
+        <div class="tabela-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Quantidade</th>
+                        <th>Preço</th>
+                        <th>Qtd Mínima</th>
+                        <th>Tipo</th>
+                        <th>Espécie</th>
+                        <th>Dosagem</th>
+                        <th>Validade</th>
+                        <th colspan="2">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in produtos %}
+                    <tr class="{% if produto.quantidade < produto.quantidade_min %}baixo-estoque{% endif %}">
+                        <td>{{ produto.nome }}</td>
+                        <td>{{ produto.descricao }}</td>
+                        <td>{{ produto.quantidade }}</td>
+                        <td>R$ {{ "%.2f"|format(produto.preco) }}</td>
+                        <td>{{ produto.quantidade_min }}</td>
+                        <td>{{ produto.tipo }}</td>
+                        <td>{{ produto.especie }}</td>
+                        <td>{{ produto.dosagem }}</td>
+                        <td>{{ produto.validade }}</td>
+                        <td class="acoes">
+                            <a href="{{ url_for('editar_produto', produto_id=produto.id_produto) }}" class="btn editar">Editar</a>
+                            <form action="{{ url_for('remover_produto', produto_id=produto.id_produto) }}" method="POST">
+                
+                            </form>
+                        </td>
+                        <td class="acoes movimentar">
+                            <form action="{{ url_for('adicionar_quantidade', produto_id=produto.id_produto) }}" method="POST">
+                                <input type="number" name="quantidade_adicionar" min="1" value="1" class="qtd-input">
+                                <button type="submit" class="btn adicionar">➕</button>
+                            </form>
+                            <form action="{{ url_for('retirar_quantidade', produto_id=produto.id_produto) }}" method="POST">
+                                <input type="number" name="quantidade_retirar" min="1" value="1" class="qtd-input">
+                                <button type="submit" class="btn retirar">➖</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="11">Nenhum produto cadastrado.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>

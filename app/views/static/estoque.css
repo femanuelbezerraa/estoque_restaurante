@@ -1,0 +1,150 @@
+
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+body {
+	background: #f3f6fb;
+	color: #213547;
+	padding: 24px;
+}
+
+.container {
+	max-width: 1100px;
+	margin: 0 auto;
+	background: #fff;
+	padding: 18px;
+	border-radius: 12px;
+	box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 20px;
+	border-radius: 12px;
+	background: #fff;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+	margin-bottom: 20px;
+}
+
+.header h1 {
+	font-size: 20px;
+	color: #0f2540;
+	font-weight: 700;
+}
+
+.nav-links {
+	display: flex;
+	gap: 16px;
+}
+
+.nav-links a {
+	color: #2d7cff;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+h2 {
+	text-align: center;
+	margin-bottom: 14px;
+	color: #0f2540;
+	font-size: 18px;
+}
+
+.tabela-wrapper {
+	overflow: auto;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 13px;
+}
+
+thead th {
+	background: #eef6ff;
+	color: #0f2540;
+	padding: 10px;
+	text-align: left;
+	font-weight: 800;
+}
+
+tbody td {
+	border-bottom: 1px solid #f1f6fb;
+	padding: 10px;
+	text-align: left;
+	color: #213547;
+}
+
+tbody tr:nth-child(even) td {
+	background: #fbfdff;
+}
+
+tbody tr td[colspan] {
+	text-align: center;
+	padding: 20px;
+	color: #777;
+	font-style: italic;
+}
+
+tbody tr:hover {
+	background: #f6f9ff;
+	transition: 0.2s;
+}
+
+.acoes {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.btn {
+	border: 0;
+	padding: 8px 12px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 700;
+	transition: transform 0.2s;
+}
+
+.btn.editar {
+	background: #0ea5e9;
+	color: #fff;
+}
+
+.btn.remover {
+	background: #ef4444;
+	color: #fff;
+}
+
+.btn.adicionar {
+	background: #10b981;
+	color: #fff;
+}
+
+.btn.retirar {
+	background: #f59e0b;
+	color: #fff;
+}
+
+.btn:hover {
+	transform: translateY(-2px);
+}
+
+
+@media (max-width: 900px) {
+	.container {
+		padding: 12px;
+	}
+}
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }

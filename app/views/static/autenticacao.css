@@ -1,0 +1,133 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f3f6fb; 
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    color: #213547;
+}
+
+.container-login {
+    width: 100%;
+    max-width: 420px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(16,24,40,0.06);
+}
+
+.header-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.titulo-principal {
+    text-align: center;
+    color: #0f2540;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.form-login {
+    display: grid;
+    gap: 12px;
+}
+
+.grupo-input {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.rotulo {
+    display: block;
+    margin-bottom: 6px;
+    color: #0f2540;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.campo-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e6eefb;
+    font-size: 14px;
+}
+
+.campo-input:focus {
+    outline: none;
+    box-shadow: 0 4px 14px rgba(45,124,255,0.08);
+    border-color: #2d7cff;
+}
+
+.mensagem-erro {
+    color: #ef4444;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.acoes-login {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.botao-login {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 0;
+    background: #2d7cff; 
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.botao-login:hover {
+    transform: translateY(-2px);
+}
+
+.link-cadastro {
+    text-align: center;
+    margin-top: 10px;
+    color: #556;
+}
+
+.link-cadastro a {
+    color: #2d7cff;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.link-cadastro a:hover {
+    text-decoration: underline;
+    color: #0f2540;
+}
+
+@media (max-width: 480px) {
+    .container-login {
+        padding: 16px;
+        margin: 18px;
+    }
+
+    .titulo-principal {
+        font-size: 18px;
+    }
+}

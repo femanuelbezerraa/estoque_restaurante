@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tela Principal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='principal.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="title">Tela Principal</div>
+      <div class="user">
+        <div class="nome-usuario">{{ session.get('usuario_nome', 'Usuário') }}</div>
+        <a href="{{ url_for('logout') }}" class="botao-sair">Sair</a>
+      </div>
+    </header>
+
+    <main>
+      {%- set resumo = resumo if resumo is defined else {} -%}
+       <div class="main-grid">
+        <section class="card">
+          <h3>Cadastrar Produto</h3>
+          <p>Adicionar um novo remédio ao sistema.</p>
+          <a href="{{ url_for('cadastro_produto') }}" class="botao botao-primario">Cadastrar</a>
+        </section>
+
+        <section class="card">
+          <h3>Controle de Estoque</h3>
+          <p>Entradas, saídas e histórico.</p>
+          <a href="{{ url_for('historico_estoque') }}" class="botao botao-secundario">Ver histórico</a>
+        </section>
+
+        <section class="card">
+          <h3>Buscar Produto</h3>
+          <p>Pesquisar por nome ou código.</p>
+          <!-- garante que o input e o botão fiquem dentro da mesma div/form -->
+          <form class="busca" action="#" method="get" onsubmit="return false;">
+            <input type="search" name="q" placeholder="Pesquisar..." />
+            <button class="botao botao-primario" type="submit">Buscar</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h3>Notificações</h3>
+          <p class="notificacoes">Sem notificações recentes.</p>
+        </section>
+      </div>
+
+       <section class="resumo" aria-label="Resumo rápido" style="margin-top:20px;">
+         <div class="resumo-grid">
+           <div class="resumo-card">
+             <div class="resumo-titulo">Total de Produtos</div>
+             <div class="resumo-valor">{{ resumo.total_produtos | default('-') }}</div>
+           </div>
+           <div class="resumo-card">
+             <div class="resumo-titulo">Produtos com estoque baixo</div>
+             <div class="resumo-valor">{{ resumo.produtos_baixo_estoque | default('-') }}</div>
+           </div>
+           <div class="resumo-card">
+             <div class="resumo-titulo">Movimentações hoje</div>
+             <div class="resumo-valor">{{ resumo.movimentacoes_hoje | default('-') }}</div>
+           </div>
+           <div class="resumo-card">
+             <div class="resumo-titulo">Usuário</div>
+             <div class="resumo-valor">{{ session.get('usuario_nome', '-') }}</div>
+           </div>
+         </div>
+       </section>
+
+       <section style="margin-top:20px; background:#fff; padding:16px; border-radius:8px;">
+         <h3>Atividades recentes</h3>
+         {% if atividades %}
+           <ul class="atividade-lista">
+             {% for a in atividades %}
+               <li class="atv-item">
+                 <div class="atv-text">{{ a.text if a.text is defined else a.get('text', a.get('descricao', a.get('acao', '-'))) }}</div>
+                 <div class="atv-meta">{{ a.data if a.data is defined else a.get('data', '') }}</div>
+               </li>
+             {% endfor %}
+           </ul>
+         {% else %}
+           <p style="color:var(--muted);">Nenhuma atividade recente.</p>
+         {% endif %}
+       </section>
+    </main>
+  </div>
+</body>
+</html>

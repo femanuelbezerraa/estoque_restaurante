@@ -1,0 +1,112 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+body {
+    background: #f3f6fb;
+    color: #213547;
+    padding: 24px;
+}
+
+.container-login {
+    max-width: 720px;
+    margin: 24px auto;
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(16,24,40,0.06);
+}
+
+.titulo-principal {
+    text-align: center;
+    color: #0f2540;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.form-usuario {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.grupo-input { display: flex; flex-direction: column; gap: 6px; }
+
+.rotulo {
+    font-weight: 700;
+    color: #0f2540;
+}
+
+.campo-input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e6eefb;
+}
+
+.campo-input:focus {
+    outline: none;
+    box-shadow: 0 4px 14px rgba(45,124,255,0.08);
+    border-color: #2d7cff;
+}
+
+.mensagem-erro {
+    color: #ef4444;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.btn-submit {
+    background: #2d7cff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    border: 0;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.2s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+}
+
+.botao-login { 
+    display: inline-block; 
+    width: 100%; 
+    padding: 10px; 
+    border-radius: 8px; 
+    border: 0; 
+    background: #2d7cff; 
+    color: #fff; 
+    font-weight: 700; 
+    cursor: pointer; 
+}
+.botao-login:hover { 
+    transform: translateY(-2px); 
+}
+
+.tabela-wrapper {
+    margin: 0 auto;
+    max-width: 900px;
+    overflow: auto;
+}
+
+.table-centered {
+    margin: 0 auto;
+}
+
+@media (max-width: 480px) {
+    .container-login {
+        padding: 16px;
+        margin: 18px;
+    }
+
+    .titulo-principal {
+        font-size: 16px;
+    }
+}

@@ -17,8 +17,8 @@ def login():
             return render_template('autenticacao.html')
             
         if check_password_hash(usuario['senha'], senha):
-            session['usuario'] = usuario['id_usuario']
-            session['usuario_nome'] = usuario['nome']
+            session['usuario_id'] = usuario.get('id_usuario') or usuario.get('id')
+            session['usuario_nome'] = usuario.get('nome')
             return redirect(url_for('principal.dashboard'))
             
         flash('Usuário ou senha incorretos', 'error')
@@ -36,14 +36,13 @@ def cadastro():
         if Usuario.buscar_por_email(email):
             flash('Email já cadastrado', 'error')
             return render_template('cadastro_usuario.html')
-            
+
         senha_hash = generate_password_hash(senha)
-        usuario = Usuario(nome=nome, email=email, senha=senha_hash)
-        usuario.cadastrar()
-        
+        Usuario.criar(nome, email, senha_hash)
+
         flash('Usuário cadastrado com sucesso!', 'success')
         return redirect(url_for('usuario.login'))
-        
+
     return render_template('cadastro_usuario.html')
 
 @rota_usuario.route('/logout')

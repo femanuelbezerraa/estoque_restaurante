@@ -14,7 +14,7 @@
         {% if error %}
             <p class="mensagem-erro">{{ error }}</p>
         {% endif %}
-        <form method="POST" action="{{ url_for('cadastro_usuario') }}" class="form-usuario">
+    <form method="POST" action="{{ url_for('usuario.cadastro') }}" class="form-usuario">
             
             <div class="grupo-input">
                 <label for="nome" class="rotulo">Nome:</label>
@@ -32,8 +32,7 @@
             </div>
            
             <button type="submit" class="botao-login">Cadastrar</button>
-        </form>
-git add .    <p class="link-cadastro">Já tem uma conta? <a href="{{ url_for('usuario.login') }}">Faça seu login</a></p>
+        </form><p class="link-cadastro">Já tem uma conta? <a href="{{ url_for('usuario.login') }}">Faça seu login</a></p>
     </div>
 
 </body>

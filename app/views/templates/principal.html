@@ -12,7 +12,7 @@
       <div class="title">Tela Principal</div>
       <div class="user">
         <div class="nome-usuario">{{ session.get('usuario_nome', 'Usuário') }}</div>
-        <a href="{{ url_for('logout') }}" class="botao-sair">Sair</a>
+  <a href="{{ url_for('usuario.logout') }}" class="botao-sair">Sair</a>
       </div>
     </header>
 
@@ -22,13 +22,13 @@
         <section class="card">
           <h3>Cadastrar Produto</h3>
           <p>Adicionar um novo remédio ao sistema.</p>
-          <a href="{{ url_for('cadastro_produto') }}" class="botao botao-primario">Cadastrar</a>
+          <a href="{{ url_for('produto.cadastro_produto') }}" class="botao botao-primario">Cadastrar</a>
         </section>
 
         <section class="card">
           <h3>Controle de Estoque</h3>
           <p>Entradas, saídas e histórico.</p>
-          <a href="{{ url_for('historico_estoque') }}" class="botao botao-secundario">Ver histórico</a>
+          <a href="{{ url_for('estoque.historico_estoque') }}" class="botao botao-secundario">Ver histórico</a>
         </section>
 
         <section class="card">

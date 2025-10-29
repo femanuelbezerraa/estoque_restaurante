@@ -17,7 +17,7 @@ def login():
         if check_password_hash(usuario['senha'], senha):
             session['usuario'] = usuario['id_usuario']
             session['usuario_nome'] = usuario.get('nome')
-            return redirect(url_for('tela_principal'))
+            return redirect(url_for('principal.index'))
         else:
             flash('Usuário ou senha incorretos', 'error')
             return render_template('autenticacao.html', erro=True)

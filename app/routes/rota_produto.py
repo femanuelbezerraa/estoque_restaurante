@@ -12,16 +12,10 @@ def cadastro_produto():
         nome = request.form['nome']
         quantidade = int(request.form['quantidade'])
         quantidade_minima = int(request.form['quantidade_min'])
-        tipo = request.form.get('tipo', '').strip().lower()
-        
-        produto = Produto(
-            nome=nome,
-            quantidade=quantidade,
-            quantidade_minima=quantidade_minima,
-            tipo=tipo
-        )
-        produto.cadastrar()
-        
+        unidade = request.form.get('unidade', 'un')
+
+        Produto.criar(nome, quantidade, quantidade_minima, unidade)
+
         flash('Produto cadastrado com sucesso!', 'success')
         return redirect(url_for('produto.lista'))
         
@@ -31,7 +25,7 @@ def cadastro_produto():
 @login_required
 def lista():
     produtos = Produto.listar_todos()
-    return render_template('produtos.html', produtos=produtos)
+    return render_template('cadastro_produto.html', produtos=produtos)
 
 @rota_produto.route('/editar/<int:produto_id>', methods=['GET', 'POST'])
 @login_required
@@ -44,9 +38,8 @@ def editar_produto(produto_id):
     if request.method == 'POST':
         nome = request.form['nome']
         quantidade_minima = int(request.form['quantidade_min'])
-        tipo = request.form.get('tipo', '').strip().lower()
         
-        Produto.atualizar(produto_id, nome, quantidade_minima, tipo)
+        Produto.atualizar(produto_id, nome=nome, quantidade_minima=quantidade_minima)
         flash('Produto atualizado com sucesso!', 'success')
         return redirect(url_for('produto.lista'))
         
@@ -78,7 +71,7 @@ def adicionar_quantidade(produto_id):
         return redirect(url_for('produto.lista'))
         
     nova_quantidade = produto['quantidade'] + quantidade
-    Produto.atualizar_quantidade(produto_id, nova_quantidade)
+    Produto.atualizar_quantidade(produto_id, nova_quantidade, produto['quantidade_minima'])
     Movimentacao.registrar(produto_id, quantidade, 'entrada')
     
     flash('Quantidade adicionada com sucesso!', 'success')
@@ -102,11 +95,8 @@ def retirar_quantidade(produto_id):
         return redirect(url_for('produto.lista'))
         
     nova_quantidade = produto['quantidade'] - quantidade
-    Produto.atualizar_quantidade(produto_id, nova_quantidade)
+    Produto.atualizar_quantidade(produto_id, nova_quantidade, produto['quantidade_minima'])
     Movimentacao.registrar(produto_id, quantidade, 'saida')
     
     flash('Quantidade retirada com sucesso!', 'success')
     return redirect(url_for('produto.lista'))
-@login_required
-def retirar_quantidade(produto_id):
-    return controle_produto.retirar_quantidade(produto_id)

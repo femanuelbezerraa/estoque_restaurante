@@ -14,8 +14,8 @@ def entrada_produto(produto_id):
                 Produto.buscar_por_id(produto_id)['quantidade'] + quantidade_entrada,
                 Produto.buscar_por_id(produto_id)['quantidade_minima']
             )
-            Movimentacao.registrar_entrada(produto_id, quantidade_entrada, session['usuario_id'])
-    return redirect(url_for('cadastro_produto'))
+        Movimentacao.registrar_entrada(produto_id, quantidade_entrada, session['usuario_id'])
+        return redirect(url_for('produto.cadastro_produto'))
 
 
 def saida_produto(produto_id):
@@ -27,8 +27,8 @@ def saida_produto(produto_id):
                 Produto.buscar_por_id(produto_id)['quantidade'] - quantidade_saida,
                 Produto.buscar_por_id(produto_id)['quantidade_minima']
             )
-            Movimentacao.registrar_saida(produto_id, quantidade_saida, session['usuario_id'])
-    return redirect(url_for('cadastro_produto'))
+    Movimentacao.registrar_saida(produto_id, quantidade_saida, session['usuario_id'])
+    return redirect(url_for('produto.cadastro_produto'))
 
 
 def historico_estoque():

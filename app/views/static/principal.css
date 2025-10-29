@@ -1,4 +1,13 @@
-
+:root{
+    --bg:#f5f7fa;
+    --card:#ffffff;
+    --primario:#2f80ed;
+    --muted:#6b7280;
+    --raio:8px;
+    --sombra: 0 6px 18px rgba(31,41,55,0.06);
+    --gap:16px;
+    --max-width:1100px;
+}
 
 *{
     box-sizing:border-box
